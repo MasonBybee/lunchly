@@ -1,0 +1,18 @@
+#searchForm {
+  border: 1px solid black;
+}
+
+.navSearch {
+}
+
+.searchContainer {
+  position: absolute;
+  top: 90%;
+  border: 1px solid red;
+  width: 225px;
+  margin: 0;
+}
+
+.searchSelection {
+  border: 1px solid rgb(136, 136, 136);
+}
