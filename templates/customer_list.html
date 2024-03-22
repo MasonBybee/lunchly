@@ -5,11 +5,14 @@
 <a class="btn btn-primary" style="float: right" href="/add/">Add a Customer</a></p>
 
 <h1>Customers</h1>
-
-<ul style="column-count: 4">
-  {% for customer in customers %}
-  <li><a href="/{{ customer.id }}/">{{ customer.fullName() }}</a></li>
-  {% endfor %}
-</ul>
+{% if customers.length === 0 %}
+  <h3 class="mt-5">No Customers found with given name.</h3>
+{% else %}
+  <ul style="column-count: 4">
+    {% for customer in customers %}
+      <li><a href="/{{ customer.id }}/">{{ customer.fullName() }}</a></li>
+    {% endfor %}
+  </ul>
+{% endif %}
 
 {% endblock %}
