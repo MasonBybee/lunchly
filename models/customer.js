@@ -53,6 +53,25 @@ class Customer {
     return new Customer(customer);
   }
 
+  static async search(str) {
+    const results = await db.query(
+      `SELECT id, first_name AS "firstName", last_name AS "lastName", phone, notes 
+    FROM customers WHERE first_name ILIKE $1 OR last_name ILIKE $1`,
+      [`%${str}%`]
+    );
+    const customers = results.rows.map((c) => new Customer(c));
+    console.log(customers);
+    return customers;
+  }
+
+  static async getFive(str) {
+    const results = await db.query(
+      `SELECT id, first_name, last_name FROM customers WHERE firstname ILIKE $1 LIMIT 5`,
+      [`%${str}%`]
+    );
+    return results.rows.map((c) => new Customer(c));
+  }
+
   /** get all reservations for this customer. */
 
   async getReservations() {
