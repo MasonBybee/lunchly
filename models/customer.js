@@ -66,7 +66,7 @@ class Customer {
 
   static async getFive(str) {
     const results = await db.query(
-      `SELECT id, first_name, last_name FROM customers WHERE firstname ILIKE $1 LIMIT 5`,
+      `SELECT id, first_name AS "firstName", last_name AS "lastName" FROM customers WHERE first_name ILIKE $1 OR last_name ILIKE $1 LIMIT 5`,
       [`%${str}%`]
     );
     return results.rows.map((c) => new Customer(c));

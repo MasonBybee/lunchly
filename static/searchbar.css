@@ -1,18 +1,30 @@
+.searchContainer {
+  display: flex;
+  margin-right: 10px;
+  padding: 0px;
+  flex-direction: column;
+  position: relative;
+  width: 200px;
+}
+
 #searchForm {
-  border: 1px solid black;
 }
 
 .navSearch {
-}
-
-.searchContainer {
-  position: absolute;
-  top: 90%;
-  border: 1px solid red;
-  width: 225px;
-  margin: 0;
+  border: 1px solid rgb(136, 136, 136);
+  padding: 0px;
+  max-width: 100%;
 }
 
 .searchSelection {
+  background-color: white;
+  position: absolute;
   border: 1px solid rgb(136, 136, 136);
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  top: 0%;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }

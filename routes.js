@@ -115,7 +115,8 @@ router.post("/:id/add-reservation/", async function (req, res, next) {
 
 router.get("/getfive/:str", async (req, res, next) => {
   try {
-    const customers = Customer.getFive(req.params.str);
+    const customers = await Customer.getFive(req.params.str);
+    console.log(customers);
     return res.json(customers);
   } catch (e) {
     return next(e);
@@ -125,7 +126,6 @@ router.get("/getfive/:str", async (req, res, next) => {
 router.get("/searchResults/:str", async (req, res, next) => {
   try {
     const customers = await Customer.search(req.params.str);
-    console.log(customers);
     return res.render("customer_list.html", { customers });
   } catch (e) {
     return next(e);
