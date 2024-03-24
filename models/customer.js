@@ -6,12 +6,13 @@ const Reservation = require("./reservation");
 /** Customer of the restaurant. */
 
 class Customer {
-  constructor({ id, firstName, lastName, phone, notes }) {
+  constructor({ id, firstName, lastName, phone, notes, numReservations }) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.phone = phone;
     this.notes = notes;
+    this.numReservations = numReservations;
   }
 
   /** find all customers. */
@@ -70,6 +71,14 @@ class Customer {
       [`%${str}%`]
     );
     return results.rows.map((c) => new Customer(c));
+  }
+
+  static async bestCustomers() {
+    const results = await db.query(`
+    SELECT c.id, c.first_name AS "firstName", c.last_name AS "lastName", COUNT(r) AS "numReservations" FROM customers c 
+    JOIN reservations r ON r.customer_id = c.id GROUP BY c.id ORDER BY COUNT(r) DESC LIMIT 10`);
+    const customers = results.rows.map((c) => new Customer(c));
+    return customers;
   }
 
   /** get all reservations for this customer. */

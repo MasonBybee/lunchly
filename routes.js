@@ -47,6 +47,15 @@ router.post("/add/", async function (req, res, next) {
   }
 });
 
+router.get("/bestCustomers/", async (req, res, next) => {
+  try {
+    const customers = await Customer.bestCustomers();
+    return res.render("customer_reservation_list.html", { customers });
+  } catch (e) {
+    return next(e);
+  }
+});
+
 /** Show a customer, given their ID. */
 
 router.get("/:id/", async function (req, res, next) {
